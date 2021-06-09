@@ -1,0 +1,20 @@
+# Logs
+logs
+*.log
+*.log*
+
+# Dependency directories
+node_modules/
+
+# dotenv environment variables file
+.env
+.env*
+
+# Output
+out/
+
+# WordPress directories
+plugins/*
+!plugins/empty
+themes/twenty*
+themes/index.php
