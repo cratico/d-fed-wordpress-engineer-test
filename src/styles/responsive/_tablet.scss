@@ -1,0 +1,91 @@
+/* ========================================================
+RESPONSIVE: TABLET
+======================================================== */
+@media (max-width: 991px) {
+    /* Buttons --------------- */
+    .btn.btn--primary {
+        font-size: 1.6rem;
+        height: 48px;
+        line-height: 44px;
+        padding: 0 2.5rem;
+    }
+
+    /* Header ---------------- */
+    .header__wrapper.sticky {height: 88px;}
+    .header__wrapper .header__logo img {max-height: 42px;}
+
+    .header__navigation .header__menu li + li, .header__navigation .header__menu > ul li + li {margin-left: 2.5rem;}
+    .header__navigation .header__menu li {font-size: 1.5rem;}
+
+    /* Banner ---------------- */
+    .main__banner .banner__subtitle {font-size: 3rem;}
+    .main__banner .banner__title {font-size: 4.8rem;}
+    
+    /* Posts  ---------------- */
+    .articles__wrapper .article__row {margin: -0.6rem;}
+    .articles__wrapper .post__item {padding: 0.6rem}
+    .articles__wrapper .post__content {font-size: 1.3rem;}
+    
+    /* Feature --------------- */
+    .main__content .feature__thumb {padding: 1rem;}
+    .main__content .feature__title {font-size: 3.2rem;}
+    .main__content .feature__subtitle {font-size: 2.2rem;}
+    .main__content .feature__description {font-size: 1.4rem;}
+}
+
+@media (max-width: 900px) {
+    /* Header ---------------- */
+    .header__navigation { display: none; }
+    .header__burger { display: block; }
+
+    /* Banner ---------------- */
+    .main__banner .banner__subtitle {font-size: 2.8rem;}
+    .main__banner .banner__title {font-size: 4.2rem;}
+    
+    /* Posts  ---------------- */
+    .articles__wrapper .post__item {width: 100%;}
+    .articles__wrapper .post__item + .post__item {margin-top: 10px;}
+
+    .articles__wrapper .post__title {font-size: 2.8rem;}
+    .articles__wrapper .post__date {font-size: 1.4rem;}
+    .articles__wrapper .post__content {font-size: 1.6rem;}
+    
+    /* Feature --------------- */
+    .main__content .container {flex-flow: row wrap;}
+    .main__content .main__column--left {width: 100%;}
+    .main__content .main__column--right {width: 100%;}
+    .main__content .feature__content {
+        padding: 2.5rem 0 0 0;
+    }
+
+    .main__content .feature__title {font-size: 5rem;}
+    .main__content .feature__subtitle { font-size: 3.6rem; }
+    .main__content .feature__description {font-size: 1.8rem;}
+    
+}
+
+@media (max-width: 782px) {
+    body.admin-bar .header__wrapper {margin-top: 46px;}
+}
+
+@media (max-width: 767px) {
+
+    /* Posts  ---------------- */
+    .articles__wrapper .post__title {font-size: 2.2rem;}
+    .articles__wrapper .post__date {font-size: 1.2rem;}
+    .articles__wrapper .post__content {font-size: 1.4rem;}
+
+    /* Feature --------------- */
+    .main__content .feature__title {font-size: 3.2rem;}
+    .main__content .feature__subtitle { font-size: 2.4rem; }
+    .main__content .feature__description {font-size: 1.4rem;}
+
+    /* Footer ---------------- */
+    .footer__wrapper .container {flex-flow: column nowrap; text-align: center; justify-content: center;}
+    .footer__wrapper .footer__copyright {margin-left: 0;}
+    .footer__phone {margin-bottom: 20px;}
+}
+
+@media (max-width: 600px) {
+    body.admin-bar .header__wrapper.admin-sticky {margin-top: 0;}
+}

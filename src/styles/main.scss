@@ -1,1 +1,27 @@
-/* Here can start to write your main styles */
+/*!
+Theme Name: MyTest
+Author: Agustin Ortiz
+Author URI: https://www.linkedin.com/in/agustin-ortiz-torres-61b0a5212/
+Description: Custom Theme for Test 
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: my-test
+*/
+
+@charset "UTF-8";
+
+// Helpers ----------------------------------------- */
+@import 'helpers/mixins';
+@import 'helpers/variables';
+
+
+// Themes ------------------------------------------ */
+// 1. Theme Base
+@import 'themes/theme_base';
+
+
+// Responsive -------------------------------------- */
+@import 'responsive/landscape';
+@import 'responsive/tablet';
+@import 'responsive/mobile';

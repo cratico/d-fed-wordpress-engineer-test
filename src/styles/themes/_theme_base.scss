@@ -1,0 +1,509 @@
+/* ========================================================
+0.0 GENERAL 
+======================================================== */
+body, html {margin: 0;}
+html {
+    font-size: 62.5%;
+}
+body {
+    letter-spacing: 0em;
+    font: 400 1.4rem/1.25em $body_font;
+    scroll-behavior: smooth;
+}
+.container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 1.5rem;
+}
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+/* 0.1 LINKS ------------------------------------------- */
+a {
+    color: #000;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 700;
+
+    &:hover { color: #333; }
+    &:active { color: inherit; }
+}
+/* 0.2 BUTTONS ----------------------------------------- */
+.btn {
+    display: inline-block;
+    background: #666;
+    border-radius: 4px;
+    color: #FFF;
+    height: 32px;
+    padding: 0 2rem;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid #666;
+    font: 500 1.4rem/32px $body_font;
+}
+.btn.btn--primary {
+    padding: 0 3rem;
+    background: #000;
+    border: 2px solid #000;
+    height: 52px;
+    font: 700 1.8rem/48px $body_font;
+
+    &:hover {
+        background: #FFF;
+        color: #000;
+    }
+}
+
+
+/* ========================================================
+1.0 HEADER 
+======================================================== */
+body.admin-bar .header__wrapper {margin-top: 32px;}
+.header__wrapper {
+    width: 100%;
+    height: 120px;
+    @include fixed(left 0 top 0);
+    z-index: 4000;
+    background-color: #FFF;
+    border-bottom: 4px solid #000;
+    transition: all 0.3s ease;
+    .container {
+        height: 100%;
+        @include flex(row nowrap, space-between, center);
+    }
+
+    .header__logo--text {
+        font: 700 4.2rem/1em $body_font;
+        letter-spacing: -0.04em;
+        color: #000;
+        margin: 0;
+        transition: all 0.3s ease;
+        sup {font-size: 1.4rem; font-weight: 400;}
+        a {font: inherit; color: inherit; }
+        &:hover { opacity: 0.8; }
+    }
+    .header__logo {
+        transition: all 0.3s ease;
+        display: inline-block;
+        &:hover { opacity: 0.8; }
+        img {
+            width: auto;
+            max-height: 54px;
+        }
+    }
+
+    &.sticky {
+        height: 100px;
+    }
+}
+.header--space {
+    height: 120px;
+}
+
+/* 1.1 NAVIGATION -------------------------------------- */
+.header__navigation {
+    height: 100%;
+    .header__menu, .header__menu > ul {
+        height: 100%;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        @include flex(row wrap, flex-start, center);
+        text-transform: uppercase;
+        li { 
+            height: 100%;
+            @include flex(row wrap, flex-start, center);
+            color: #666;
+            position: relative;
+            font: 500 1.6rem/1em $body_font;
+        }
+        li + li {margin-left: 5em;}
+        a {
+            text-decoration: none;
+            display: inline-block;
+            color: inherit;
+            font: inherit;
+            display: block;
+            position: relative;
+            &::after {
+                transition: all 0.3s ease;
+                content: '';
+                @include absolute(left 0 bottom -4px);
+                width: 100%;
+                height: 2px;
+                background: #000;
+                transform: scaleX(0);
+            }
+            
+        }
+        
+        li:hover {
+            font-weight: 700;
+            color: #000;
+            a::after { transform: scaleX(1); }
+        }
+
+        .sub-menu {
+            background: #000;
+            display: block;
+            pointer-events: none;
+            opacity: 0;
+            transition: all 0.3s ease;
+            transform-origin: top center;
+            transform: scaleY(0) translateX(-50%);
+            @include absolute(left 50% top 100%);
+            padding: 5px 0;
+            margin: 0;
+            min-width: 150px;
+            font: 400 1.2rem/1em $body_font;
+            li {
+                display: block;
+                margin: 0;
+                padding: 0;
+                color: #FFF;
+                font-size: 1.3rem;
+            }
+            li + li {margin: 0;}
+            a {
+                font-size: 1.3rem;
+                text-align: center;
+                display: block;
+                padding: 8px 12px;
+            }
+            a::after {
+                display: none;
+            }
+            a:hover {color: #666;}
+        }
+
+        li.menu-item-has-children:hover .sub-menu {
+            opacity: 1;
+            transform: scaleY(1) translateX(-50%);
+            pointer-events: all;
+        }
+
+    }
+}
+
+.header__burger {
+    display: inline-block;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    width: 48px;
+    color: #000;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: none;
+
+    &::after, &::before {
+        content: '';
+        position: relative;
+        top: -5px;
+    }
+    span, &::after, &::before {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: currentColor;
+    }
+    &::after {
+        top: auto;
+        bottom: -5px;
+    }
+
+    &:hover {color: #999;}
+}
+
+/* 1.2 RESPONSIVE MENU --------------------------------- */
+.menu__overlay {
+    background: rgba(0,0,0,0.5);
+    @include fixed(left 0 top 0);
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease 0.6s;
+    transform: scaleY(0);
+    transform-origin: top center;
+    pointer-events: none;
+    opacity: 0;
+}
+.responsive__menu {
+    @include fixed(top 0 left 0);
+    width: 95%;
+    max-width: 320px;
+    height: 100%;
+    z-index: 10000;
+    transition: all 0.6s ease;
+    opacity: 0;
+    transform: translateX(-100%);
+
+    .responsive__navigation {
+        background: #FFF;
+        position: relative;
+        height: 100vh;
+        width: 100%;
+        z-index: 100;
+        overflow: auto;
+        padding: 80px 30px 20px;
+    }
+
+    .close {
+        background: transparent;
+        cursor: pointer;
+        outline: none;
+        border: 0;
+        transition: all 0.3s ease;
+        @include absolute(right 20px top 50px);
+        width: 32px;
+        height: 32px;
+        color: #000;
+        transform: rotate(45deg);
+
+        &::after, &::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: currentColor;
+            margin-top: -2px;
+            @include absolute(left 0 top 50%);
+        }
+
+        &::after {
+            transform: rotate(90deg);
+        }
+
+        &:hover {color: #999;}
+    }
+
+    .menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        
+        a {
+            display: block;
+            font: 600 1.8rem/1.1em $body_font;
+            &:hover {color: #999;}
+        }
+
+        li + li { margin-top: 25px; }
+        ul {
+            margin: 0;
+            list-style-type: none;
+            margin: 0;
+            padding: 25px 0 0 15px;
+            li + li {margin-top: 15px;}
+            a {font-weight: 400; font-size: 1.6rem;}
+        }
+    }
+}
+
+.menu-displayed .responsive__menu {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: all;
+}
+.menu-displayed .menu__overlay {
+    transition: all 0.3s ease 0s;
+    transform: scaleY(1);
+    pointer-events: all;
+    opacity: 1;
+}
+
+/* ========================================================
+2.0 BANNER
+======================================================== */
+.main__banner {
+    width: 100%;
+    height: 80vh;
+    max-height: 620px;
+    padding-bottom: 10rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 50;
+    background: $light_gray;
+    color: #000;
+
+    .main__banner--image {
+        @include center_image();
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        min-height: 100%;
+        z-index: 10;
+    }
+
+    .container {
+        position: relative;
+        z-index: 100;
+        height: 100%;
+        @include flex(row nowrap, flex-start, center);
+    }
+    .banner__subtitle {
+        margin: 0;
+        font: 600 3.8rem/1.2em $body_font;
+    }
+    .banner__title {
+        font: 700 6rem/1.2em $body_font;
+        margin: 1rem 0 ;
+    }
+    .btn--banner {margin-top: 3rem;}
+
+    &.main__banner--empty {padding-bottom: 0;}
+}
+
+/* ========================================================
+3.0 LATEST ARTICLES 
+======================================================== */
+.articles__wrapper {
+    margin-top: -10rem;
+    position: relative;
+    z-index: 100;
+    .container {
+        @include flex();
+    }
+    .article__list {
+        width: 100%;
+        @include flex(row wrap, flex-start);
+    }
+    .article__row {
+        margin: -1.2rem;
+        min-width: 100%;
+    }
+    .post__item {
+        padding: 1.2rem;
+        width: 33.3%;
+    }
+    .post__thumb {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        display: block;
+        background: $light_gray;
+        padding-bottom: 48.86%;
+        transition: all 0.8s ease;
+        img {
+            object-fit: cover;
+            @include center_image();
+            width: 100%;
+            height: auto;
+            transition: all 0.3s ease;
+        }
+        &:hover img {
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+    }
+    .post__item--inside {
+        background: #FFF;
+        height: 100%;
+        padding: 1.4rem 1.4rem 3rem 1.4rem;
+        box-shadow: 0 0 4px rgba(0,0,0,0.15);
+    }
+    .post__data {
+        padding: 2.2rem 1.2rem 0;
+    }
+    .post__title {
+        font: 500 3.2rem/1.2em $body_font;
+        color: #000;
+        margin: 0 0 5px;
+        a {font-weight: inherit;}
+        a:hover {color: #666;}
+    }
+    .post__date {
+        color: #000;
+        font: 500 1.35rem/1.2em $body_font;
+    }
+    .post__content {
+        text-align: justify;
+        margin-top: 15px;
+        color: #333;
+        word-break: break-word;
+        font: 500 1.45rem/1.6em $body_font;
+    }
+
+    .port__item:nth-child(2) .post__thumb {background: $middle_gray;}
+    .port__item:nth-child(3) .post__thumb {background: $dark_gray;}
+}
+
+/* ========================================================
+4.0 FEATURE 
+======================================================== */
+.main__content {
+    padding: 6rem 0;
+    .container {
+        @include flex(row nowrap, space-between);   
+    }
+    .main__column--left {
+        width: 45%;
+    }
+    .main__column--right {
+        width: 55%;
+    }
+    .feature__content {
+        height: 100%;
+        @include flex(column nowrap, flex-start, flex-start);
+        padding: 2.5rem 4.5rem;
+    }
+    .main__column--full .feature__content { width: 100%; padding-left: 0; padding-right: 0; }
+    .feature__thumb {
+        padding: 1.5rem;
+        border: 1px solid #CCC;
+        img {
+            @include center_image();
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+        }
+    }
+    .feature__thumb--inside {
+        width: 100%;
+        position: relative;
+        padding-bottom: 92%;
+        background: $dark_gray;
+    }
+    .feature__title {
+        letter-spacing: -0.01em;
+        font: 700 4.2rem/1.2em $body_font;
+        margin: 0;
+    }
+    .feature__subtitle {
+        font: 600 3.2rem/1.2em $body_font;
+        margin: 1.4rem 0 2rem;
+    }
+    .feature__description {
+        margin-top: 0;
+        letter-spacing: -0.02em;
+        margin-bottom: 1.5rem;
+        color: #333;
+        font: 600 1.9rem/1.7em $body_font;
+        text-align: justify;
+        padding-right: 6rem;
+    }
+    .btn--feature {margin-top: auto;}
+}
+
+/* ========================================================
+5.0 FOOTER 
+======================================================== */
+.footer__wrapper {
+    font: 400 1.4rem/1em $body_font;
+    .container {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+        position: relative;
+        @include flex(row nowrap, space-between, center);
+        &::before {
+            content: '';
+            display: block;
+            width: calc(100% - 3rem);
+            height: 4px;
+            background: #000;
+            @include absolute(left 1.5rem top 0);
+        }
+        a:hover {color: #999;}
+    }
+    .footer__copyright {margin-left: auto;}
+}

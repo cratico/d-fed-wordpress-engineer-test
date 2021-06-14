@@ -1,0 +1,95 @@
+// ------------------------------------------------------------- 
+// MIXINS
+// -------------------------------------------------------------- */
+// Mixin: Clearfix
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+// Mixin: Position
+@mixin position($position, $args) {
+    @each $o in top right bottom left {
+        $i: index($args, $o);
+        @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number {
+            #{$o}: nth($args, $i + 1);
+        }
+    }
+    position: $position;
+}
+@mixin absolute($args: '') {
+    @include position(absolute, $args);
+}
+  
+@mixin fixed($args: '') {
+    @include position(fixed, $args);
+}
+  
+@mixin relative($args: '') {
+    @include position(relative, $args);
+}
+
+@mixin list($padding: 0, $margin: 0, $list-type: none) {
+    padding: $padding;
+    margin: $margin;
+    list-style: $list-type;
+}
+
+@mixin wh($width: auto, $height: auto) {
+    width: $width;
+    height: $height;
+}
+
+@mixin center_image($args: '') {
+    transform: translate(-50%, -50%);
+    @include absolute(left 50% top 50%);
+}
+
+@mixin clear_mp() {
+    padding: 0;
+    margin: 0;
+}
+
+@mixin flex($flow: row nowrap, $justify: '', $align: '') {
+    display: flex;
+    flex-flow: $flow;
+    @if $justify != '' {
+        justify-content: $justify;
+    }
+
+    @if $align != '' {
+        align-items: $align;
+    }
+}
+
+// Mixin: Keyframes
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+  
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+  
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+// Mixin: Background gradient
+@mixin gradient($start-color, $end-color, $orientation) {
+    background: $start-color;
+    @if $orientation == 'vertical' {
+        background: -webkit-linear-gradient(top, $start-color, $end-color);
+        background: linear-gradient(to bottom, $start-color, $end-color);
+    } @else if $orientation == 'horizontal' {
+        background: -webkit-linear-gradient(left, $start-color, $end-color);
+        background: linear-gradient(to right, $start-color, $end-color);
+    } @else {
+        background: -webkit-radial-gradient(center, ellipse cover, $start-color, $end-color);
+        background: radial-gradient(ellipse at center, $start-color, $end-color);
+    }
+}

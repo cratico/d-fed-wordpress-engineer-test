@@ -1,0 +1,28 @@
+/* ========================================================
+RESPONSIVE: LANDSCAPE
+======================================================== */
+@media (max-width: 1199px) {
+    /* Header ---------------- */
+    .header__wrapper,
+    .header--space {height: 105px;}
+    .header__wrapper.sticky {height: 88px;}
+    .header__wrapper .header__logo img {max-height: 42px;}
+    
+    .header__navigation .header__menu li:last-child .sub-menu { transform: scaleY(0) translateX(0); left: auto; right: 0; }
+    .header__navigation .header__menu li.menu-item-has-children:last-child:hover .sub-menu { transform: scaleY(1) translateX(0); }
+
+    /* Banner ---------------- */
+    .main__banner .banner__subtitle {font-size: 3rem;}
+    .main__banner .banner__title {font-size: 4.8rem;}
+    
+    /* Posts  ---------------- */
+    .articles__wrapper .post__item--inside {padding: 1rem 1rem 2rem 1rem;}
+    .articles__wrapper .post__title {font-size: 2.4rem;}
+    .articles__wrapper .post__data {padding: 2rem 0 0;}
+    
+    /* Feature --------------- */
+    .main__content .feature__content {padding: 2rem 0 2rem 3.2rem;}
+    .main__content .feature__title {font-size: 3.6rem;}
+    .main__content .feature__subtitle {font-size: 2.6rem;}
+    .main__content .feature__description {font-size: 1.6rem;}
+}
